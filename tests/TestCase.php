@@ -2,9 +2,9 @@
 
 namespace Controlla\Core\Tests;
 
+use Controlla\Core\CoreServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Controlla\Core\CoreServiceProvider;
 
 class TestCase extends Orchestra
 {
