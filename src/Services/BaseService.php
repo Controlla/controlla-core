@@ -2,14 +2,12 @@
 
 namespace Controlla\Core\Services;
 
-use Exception;
-
 class Service implements BaseServiceInterface
 {
-
     /**
      * Find an item by id
-     * @param mixed $id
+     *
+     * @param  mixed  $id
      * @return Model|null
      */
     public function find($id)
@@ -19,7 +17,8 @@ class Service implements BaseServiceInterface
 
     /**
      * Find an item by id or fail
-     * @param mixed $id
+     *
+     * @param  mixed  $id
      * @return Model|null
      */
     public function findOrFail($id)
@@ -29,6 +28,7 @@ class Service implements BaseServiceInterface
 
     /**
      * Return all items
+     *
      * @return Collection|null
      */
     public function all()
@@ -38,7 +38,8 @@ class Service implements BaseServiceInterface
 
     /**
      * Create an item
-     * @param array|mixed $data
+     *
+     * @param  array|mixed  $data
      * @return void
      */
     public function create($data)
@@ -48,8 +49,9 @@ class Service implements BaseServiceInterface
 
     /**
      * Update a model
-     * @param int|mixed $id
-     * @param array|mixed $data
+     *
+     * @param  int|mixed  $id
+     * @param  array|mixed  $data
      * @return void
      */
     public function update($id, array $data)
@@ -59,7 +61,8 @@ class Service implements BaseServiceInterface
 
     /**
      * Delete a model
-     * @param int|Model $id
+     *
+     * @param  int|Model  $id
      * @return void
      */
     public function delete($id)
@@ -69,7 +72,7 @@ class Service implements BaseServiceInterface
 
     /**
      * multiple delete
-     * @param array $id
+     *
      * @return void
      */
     public function destroy(array $id)
