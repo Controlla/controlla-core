@@ -6,7 +6,7 @@ use Controlla\Core\Repositories\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class Service implements BaseServiceInterface
+class BaseService implements BaseServiceInterface
 {
     /**
      * @var BaseRepositoryInterface
