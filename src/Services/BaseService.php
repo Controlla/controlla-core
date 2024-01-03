@@ -2,9 +2,10 @@
 
 namespace Controlla\Core\Services;
 
-use Controlla\Core\Repositories\BaseRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+use Controlla\Core\Repositories\BaseRepositoryInterface;
 
 class BaseService implements BaseServiceInterface
 {
@@ -12,6 +13,18 @@ class BaseService implements BaseServiceInterface
      * @var BaseRepositoryInterface
      */
     protected $repository;
+
+    /**
+     * Get paginated results
+     *
+     * @param Request $request
+     * @param int $pageSize
+     * @return mixed
+     */
+    public function getAllPaginated(Request $request, int $pageSize = 20): mixed
+    {
+        return $this->repository->getAllPaginated($request, $pageSize);
+    }
 
     /**
      * Find an item by id

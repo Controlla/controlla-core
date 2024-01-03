@@ -2,11 +2,21 @@
 
 namespace Controlla\Core\Repositories;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 interface BaseRepositoryInterface
 {
+    /**
+     * Get paginated data
+     *
+     * @param Request $request
+     * @param int $pageSize
+     * @return mixed
+     */
+    public function getAllPaginated(Request $request, int $pageSize = 20): mixed;
+
     /**
      * Fin an item by id
      *
