@@ -3,14 +3,14 @@
 namespace Controlla\Core\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Console\ConfirmableTrait;
 
 class TruncateCommand extends Command
 {
     use ConfirmableTrait;
-  
+
     protected $signature = 'db:truncate {tables?* : Optionally specify only specific tables to truncate}
     {--force : Force the operation to run when in production}
     {--checks=true : Enable or disable foreign key checks during truncation}';
@@ -22,7 +22,7 @@ class TruncateCommand extends Command
         if (! $this->confirmToProceed()) {
             return 1;
         }
-  
+
         $foreignKeyChecks = $this->hasOption('checks') && filter_var($this->option('checks'), FILTER_VALIDATE_BOOLEAN);
 
         if (! $foreignKeyChecks) {

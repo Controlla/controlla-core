@@ -2,8 +2,8 @@
 
 namespace Controlla\Core;
 
-use Spatie\LaravelPackageTools\Package;
 use Controlla\Core\Commands\TruncateCommand;
+use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class CoreServiceProvider extends PackageServiceProvider
