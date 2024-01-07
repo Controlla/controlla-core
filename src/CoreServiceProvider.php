@@ -2,8 +2,8 @@
 
 namespace Controlla\Core;
 
-use Controlla\Core\Commands\CoreCommand;
 use Spatie\LaravelPackageTools\Package;
+use Controlla\Core\Commands\TruncateCommand;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class CoreServiceProvider extends PackageServiceProvider
@@ -20,6 +20,6 @@ class CoreServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_core_table')
-            ->hasCommand(CoreCommand::class);
+            ->hasCommand(TruncateCommand::class);
     }
 }
