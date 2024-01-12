@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+use Controlla\Core\Services\BaseServiceInterface;
+
+interface {{ class }} extends BaseServiceInterface
+{
+
+    // Write something awesome
+}

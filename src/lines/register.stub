@@ -1,0 +1,3 @@
+$this->app->singleton({{ model }}RepositoryInterface::class, {{ model }}Repository::class);
+        $this->app->singleton({{ model }}ServiceInterface::class, {{ model }}Service::class);
+        // New Singleton

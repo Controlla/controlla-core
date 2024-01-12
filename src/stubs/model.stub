@@ -1,0 +1,27 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Model;
+use Krnos\Fire\HasChanges;
+
+class {{ class }} extends Model
+{
+    use HasChanges;
+
+    protected $casts = [];
+
+    protected $appends = [];
+
+    protected $fillable = [];
+
+    /**
+     * Get the model's label in fire.
+     *
+     * @return string
+     */
+    public function getModelLabel()
+    {
+        return $this->column;
+    }
+}

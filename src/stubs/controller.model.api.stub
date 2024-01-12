@@ -1,0 +1,155 @@
+<?php
+
+namespace {{ namespace }};
+
+use DummyFullModelClass;
+use App\Exports\{{ model }}Export;
+use App\Imports\{{ model }}Import;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
+use Illuminate\Http\JsonResponse;
+use App\Http\Filters\QueryBuilder;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ExportRequest;
+use App\Http\Requests\ImportRequest;
+use App\Http\Resources\{{ model }}\{{ model }}Resource;
+use Illuminate\Database\Eloquent\Collection;
+use App\Services\{{ model }}\{{ model }}ServiceInterface;
+use App\Http\Requests\{{ model }}\{{ model }}StoreRequest;
+use App\Http\Requests\{{ model }}\{{ model }}UpdateRequest;
+
+class {{ class }} extends Controller
+{
+    /**
+     * @var {{ model }}ServiceInterface
+     */
+    protected {{ model }}ServiceInterface $service;
+
+    public function __construct({{ model }}ServiceInterface $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $this->authorize('index', {{ model }}::class);
+
+        return {{ model }}Resource::collection($this->service->getAllPaginated($request))->response();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\{{ model }}\{{ model }}StoreRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store({{ model }}StoreRequest $request): {{ model }}Resource
+    {
+        $this->authorize('store', {{ model }}::class);
+        return new {{ model }}Resource($this->service->create($request->validated()));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \DummyFullModelClass ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function show({{ model }} ${{ modelVariable }}): {{ model }}Resource
+    {
+        $this->authorize('show', ${{ modelVariable }});
+        ${{ modelVariable }} = $this->service->findOrFail(${{ modelVariable }}->id);
+        return new {{ model }}Resource(${{ modelVariable }});
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\{{ model }}\{{ model }}UpdateRequest  $request
+     * @param  \DummyFullModelClass ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function update({{ model }}UpdateRequest $request, {{ model }} ${{ modelVariable }}): {{ model }}Resource
+    {
+        $this->authorize('update', ${{ modelVariable }});
+        ${{ modelVariable }} = $this->service->update(${{ modelVariable }}->id, $request->validated());
+        return new {{ model }}Resource(${{ modelVariable }});
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \DummyFullModelClass  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy({{ model }} ${{ modelVariable }}): JsonResponse
+    {
+        $this->authorize('destroy', ${{ modelVariable }});
+        $this->service->delete(${{ modelVariable }}->id);
+        return response()->json(null, 204);
+    }
+
+    /**
+     * Remove multiple resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyMany(Request $request): JsonResponse
+    {
+        foreach ($request->input('ids') as $id) {
+            ${{ modelVariable }} = {{ model }}::find($id);
+
+            if (!${{ modelVariable }}) {
+                return response()->json(['errors' => array(['code' => 404,'message' => __('{{ modelVariablePlural }}.not_find')])], 404);
+            }
+            $this->authorize('delete', ${{ modelVariable }});
+        }
+
+        $this->service->destroy($request->input('ids'));
+
+        return response()->json(null, 204);
+    }
+
+    /**
+     * Display report from a listing of the resource.
+     *
+     * @param  App\Http\Requests\ExportRequest $request
+     * @return PDF CSV or XLS
+     */
+    public function export(ExportRequest $request, Excel $excel)
+    {
+        $this->authorize('index', {{ model }}::class);
+        $file = '{{ modelVariablePlural }}.' . $request->input('format');
+        $queryBuilder = new QueryBuilder(new {{ model }}(), $request->request);
+        return $excel->download(new {{ model }}Export($queryBuilder->build()->get()), $file);
+    }
+
+    /**
+     * Import data from a listing of the file.
+     *
+     * @param  App\Http\Requests\ImportRequest $request
+     * @return PDF CSV or XLS
+     */
+    public function import(ImportRequest $request, Excel $excel): JsonResponse
+    {
+        $excel->import(new {{ model }}Import(auth()->user()), $request->file('importFile'));
+
+        return response()->json(['code' => 201,'message' => __('strings.imported_successfully')], 201);
+    }
+
+    /**
+     * Dowload template.
+     *
+     * @return File CSV
+     */
+    public function template(Excel $excel)
+    {
+        return $excel->download(new {{ model }}Export(new Collection([])), '{{ modelVariablePlural }}.csv');
+    }
+}

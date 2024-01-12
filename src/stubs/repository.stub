@@ -1,0 +1,93 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Request;
+use App\Models\{{ model }};
+use App\Http\Filters\QueryBuilder;
+
+class {{ model }}Repository implements {{ model }}RepositoryInterface
+{
+    /**
+     * Get paginated results
+     *
+     * @param Request $request
+     * @param int $pageSize
+     * @return mixed
+     */
+    public function getAllPaginated(Request $request, int $pageSize = 20): mixed
+    {
+        $queryBuilder = new QueryBuilder(new {{ model }}(), $request);
+        return $queryBuilder->build()->paginate($pageSize);
+    }
+
+    /**
+     * Fin an item by id
+     * @param mixed $id
+     * @return Model|null
+     */
+    public function find($id)
+    {
+        return {{ model }}::find($id);
+    }
+
+    /**
+     * find Or Fail
+     * @param $id
+     * @return mixed
+     */
+    public function findOrFail($id)
+    {
+        return {{ model }}::findOrFail($id);
+    }
+
+    /**
+     * Return all items
+     * @return Collection|null
+     */
+    public function all()
+    {
+        return {{ model }}::all();
+    }
+
+    /**
+     * Create an item
+     * @param array|mixed $data
+     * @return Model|null
+     */
+    public function create($data)
+    {
+        return {{ model }}::create($data);
+    }
+
+    /**
+     * Update a item
+     * @param int|mixed $id
+     * @param array|mixed $data
+     * @return bool|mixed
+     */
+    public function update($id, array $data)
+    {
+        return {{ model }}::findOrFail($id)->update($data);
+    }
+
+    /**
+     * destroy many item with primary key
+     * @param int|Model $id
+     */
+    public function destroy(array $id)
+    {
+        return {{ model }}::destroy($id);
+    }
+
+    /**
+     * delete item
+     * @param Model|int $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        return {{ model }}::findOrFail($id)->delete();
+    }
+
+}

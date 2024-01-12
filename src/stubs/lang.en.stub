@@ -1,0 +1,19 @@
+<?php
+
+return [
+
+    // Form
+    'add' => 'Add {{ modelVariable }}',
+    'edit' => 'Edit {{ modelVariable }}',
+    'delete' => 'Delete {{ modelVariable }}',
+    'not_find' => 'Can not find {{ modelVariable }} with this code.',
+
+    'id' => 'Id',
+    'name' => 'Name',
+    'name_placeholder' => 'Enter the {{ modelVariable }}\'s name',
+    'status' => 'Status',
+
+    'created_at' => 'Created at',
+    'report_title' => '{{ modelPlural }} Report',
+
+];
