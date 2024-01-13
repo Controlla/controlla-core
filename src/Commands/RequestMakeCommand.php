@@ -86,7 +86,6 @@ class RequestMakeCommand extends GeneratorCommand
      * Replace the class name for the given stub.
      *
      * @param  string  $stub
-     * @param  string  $name
      * @return RequestMakeCommand
      */
     protected function replaceType(&$stub)
