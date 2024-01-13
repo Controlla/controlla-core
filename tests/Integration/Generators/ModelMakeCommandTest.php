@@ -85,5 +85,4 @@ class ModelMakeCommandTest extends TestCase
         $this->assertFilenameNotExists('database/factories/FooFactory.php');
         $this->assertFilenameExists('database/seeders/FooSeeder.php');
     }
-
 }
