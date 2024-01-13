@@ -33,13 +33,11 @@ class PolicyMakeCommand extends GeneratorCommand
     /**
      * Get the stub file for the generator.
      *
-     * @return void|string
+     * @return string
      */
     protected function getStub()
     {
-        return $this->option('model')
-            ? $this->resolveStubPath('/../stubs/policy.stub')
-            : $this->error('Something went wrong!');
+        return $this->resolveStubPath('/../stubs/policy.stub');
     }
 
     /**
