@@ -22,7 +22,7 @@ class ReplaceLinesCommand extends Command
      *
      * @var string
      */
-    protected $name = 'replace:lines';
+    protected $name = 'controlla:replace:lines';
 
     /**
      * The console command description.

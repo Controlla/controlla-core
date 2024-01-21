@@ -10,7 +10,7 @@ class ServiceInterfaceMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:serviceinterface', ['name' => 'FooServiceInterface', '--model' => 'Foo'])
+        $this->artisan('controlla:make:serviceinterface', ['name' => 'FooServiceInterface', '--model' => 'Foo'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

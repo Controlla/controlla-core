@@ -14,7 +14,7 @@ class PolicyMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:policy';
+    protected $name = 'controlla:make:policy';
 
     /**
      * The console command description.

@@ -10,7 +10,7 @@ class ServiceMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:service', ['name' => 'FooService', '--model' => 'Foo'])
+        $this->artisan('controlla:make:service', ['name' => 'FooService', '--model' => 'Foo'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

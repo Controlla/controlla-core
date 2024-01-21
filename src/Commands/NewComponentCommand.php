@@ -12,7 +12,7 @@ class NewComponentCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:new';
+    protected $name = 'controlla:make:crud';
 
     /**
      * The console command description.
@@ -129,7 +129,7 @@ class NewComponentCommand extends GeneratorCommand
 
         $method = $type === 'create' ? 'Store' : 'Update';
 
-        $this->call('component:request', [
+        $this->call('controlla:make:request', [
             'name' => "{$request}{$method}Request",
             '--model' => $request,
             '--type' => $type,
@@ -147,7 +147,7 @@ class NewComponentCommand extends GeneratorCommand
 
         $modelName = $this->qualifyClass($this->getNameInput());
 
-        $this->call('component:export', [
+        $this->call('controlla:make:export', [
             'name' => "{$export}Export",
             '--model' => $modelName,
         ]);
@@ -164,7 +164,7 @@ class NewComponentCommand extends GeneratorCommand
 
         $modelName = $this->qualifyClass($this->getNameInput());
 
-        $this->call('component:import', [
+        $this->call('controlla:make:import', [
             'name' => "{$import}Import",
             '--model' => $modelName,
         ]);
@@ -179,7 +179,7 @@ class NewComponentCommand extends GeneratorCommand
     {
         $resource = Str::studly(class_basename($this->argument('name')));
 
-        $this->call('component:resource', [
+        $this->call('controlla:make:resource', [
             'name' => "{$resource}Resource",
             '--model' => $resource,
         ]);
@@ -196,7 +196,7 @@ class NewComponentCommand extends GeneratorCommand
 
         $modelName = $this->qualifyClass($this->getNameInput());
 
-        $this->call('component:policy', [
+        $this->call('controlla:make:policy', [
             'name' => "{$policy}Policy",
             '--model' => $modelName,
         ]);
@@ -213,7 +213,7 @@ class NewComponentCommand extends GeneratorCommand
 
         $modelName = $this->qualifyClass($this->getNameInput());
 
-        $this->call('component:controller', [
+        $this->call('controlla:make:controller', [
             'name' => "{$controller}Controller",
             '--model' => $modelName,
         ]);
@@ -228,7 +228,7 @@ class NewComponentCommand extends GeneratorCommand
     {
         $repository = Str::studly(class_basename($this->argument('name')));
 
-        $this->call('component:repositoryinterface', [
+        $this->call('controlla:make:repositoryinterface', [
             'name' => "{$repository}RepositoryInterface",
             '--model' => $repository,
         ]);
@@ -243,7 +243,7 @@ class NewComponentCommand extends GeneratorCommand
     {
         $repository = Str::studly(class_basename($this->argument('name')));
 
-        $this->call('component:repository', [
+        $this->call('controlla:make:repository', [
             'name' => "{$repository}Repository",
             '--model' => $repository,
         ]);
@@ -258,7 +258,7 @@ class NewComponentCommand extends GeneratorCommand
     {
         $service = Str::studly(class_basename($this->argument('name')));
 
-        $this->call('component:serviceinterface', [
+        $this->call('controlla:make:serviceinterface', [
             'name' => "{$service}ServiceInterface",
             '--model' => $service,
         ]);
@@ -273,7 +273,7 @@ class NewComponentCommand extends GeneratorCommand
     {
         $service = Str::studly(class_basename($this->argument('name')));
 
-        $this->call('component:service', [
+        $this->call('controlla:make:service', [
             'name' => "{$service}Service",
             '--model' => $service,
         ]);
@@ -303,13 +303,13 @@ class NewComponentCommand extends GeneratorCommand
         $model = Str::studly(class_basename($this->argument('name')));
         $file = Str::snake(class_basename($this->argument('name')));
 
-        $this->call('component:lang', [
+        $this->call('controlla:make:lang', [
             'name' => "{$file}",
             '--model' => $model,
             '--lang' => 'es',
         ]);
 
-        $this->call('component:lang', [
+        $this->call('controlla:make:lang', [
             'name' => "{$file}",
             '--model' => $model,
             '--lang' => 'en',
@@ -325,7 +325,7 @@ class NewComponentCommand extends GeneratorCommand
     {
         $module = Str::studly(class_basename($this->argument('name')));
 
-        $this->call('replace:lines', [
+        $this->call('controlla:replace:lines', [
             '--model' => $module,
         ]);
     }

@@ -14,7 +14,7 @@ class ServiceMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:service';
+    protected $name = 'controlla:make:service';
 
     /**
      * The console command description.

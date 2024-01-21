@@ -15,7 +15,7 @@ class LangMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:lang';
+    protected $name = 'controlla:make:lang';
 
     /**
      * The console command description.

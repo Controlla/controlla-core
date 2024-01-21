@@ -14,7 +14,7 @@ class RequestMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:request';
+    protected $name = 'controlla:make:request';
 
     /**
      * The console command description.
@@ -70,10 +70,8 @@ class RequestMakeCommand extends GeneratorCommand
      * Replace the class name for the given stub.
      *
      * @param  string  $stub
-     * @param  string  $name
-     * @return RequestMakeCommand
      */
-    protected function replaceModel(&$stub, $name)
+    protected function replaceModel(&$stub): self
     {
         $modelVariable = $this->option('model');
 
@@ -86,9 +84,8 @@ class RequestMakeCommand extends GeneratorCommand
      * Replace the class name for the given stub.
      *
      * @param  string  $stub
-     * @return RequestMakeCommand
      */
-    protected function replaceType(&$stub)
+    protected function replaceType(&$stub): self
     {
         $type = $this->option('type');
 

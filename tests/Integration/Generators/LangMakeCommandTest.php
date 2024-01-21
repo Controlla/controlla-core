@@ -10,7 +10,7 @@ class LangMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:lang', ['name' => 'foo', '--model' => 'Foo', '--lang' => 'es'])
+        $this->artisan('controlla:make:lang', ['name' => 'foo', '--model' => 'Foo', '--lang' => 'es'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

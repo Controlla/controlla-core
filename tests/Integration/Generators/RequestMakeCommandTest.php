@@ -10,7 +10,7 @@ class RequestMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:request', ['name' => 'FooStoreRequest', '--model' => 'Foo', '--type' => 'Store'])
+        $this->artisan('controlla:make:request', ['name' => 'FooStoreRequest', '--model' => 'Foo', '--type' => 'Store'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

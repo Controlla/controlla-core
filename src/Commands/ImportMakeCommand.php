@@ -14,7 +14,7 @@ class ImportMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:import';
+    protected $name = 'controlla:make:import';
 
     /**
      * The console command description.

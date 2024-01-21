@@ -14,7 +14,7 @@ class ServiceInterfaceMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:serviceinterface';
+    protected $name = 'controlla:make:serviceinterface';
 
     /**
      * The console command description.

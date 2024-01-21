@@ -11,7 +11,7 @@ class ScopeMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:scope';
+    protected $name = 'controlla:make:scope';
 
     /**
      * The console command description.

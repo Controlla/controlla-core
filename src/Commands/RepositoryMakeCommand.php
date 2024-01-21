@@ -14,7 +14,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:repository';
+    protected $name = 'controlla:make:repository';
 
     /**
      * The console command description.

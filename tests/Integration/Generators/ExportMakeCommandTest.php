@@ -10,7 +10,7 @@ class ExportMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:export', ['name' => 'FooExport', '--model' => 'Foo'])
+        $this->artisan('controlla:make:export', ['name' => 'FooExport', '--model' => 'Foo'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

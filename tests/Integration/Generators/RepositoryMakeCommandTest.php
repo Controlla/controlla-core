@@ -10,7 +10,7 @@ class RepositoryMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:repository', ['name' => 'FooRepository', '--model' => 'Foo'])
+        $this->artisan('controlla:make:repository', ['name' => 'FooRepository', '--model' => 'Foo'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

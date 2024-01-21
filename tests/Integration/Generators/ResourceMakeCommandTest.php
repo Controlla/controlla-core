@@ -10,7 +10,7 @@ class ResourceMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:resource', ['name' => 'FooResource', '--model' => 'Foo'])
+        $this->artisan('controlla:make:resource', ['name' => 'FooResource', '--model' => 'Foo'])
             ->assertExitCode(0);
 
         $this->assertFileContains([

@@ -14,7 +14,7 @@ class ExportMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:export';
+    protected $name = 'controlla:make:export';
 
     /**
      * The console command description.

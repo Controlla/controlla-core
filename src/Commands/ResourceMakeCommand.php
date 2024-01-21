@@ -15,7 +15,7 @@ class ResourceMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'component:resource';
+    protected $name = 'controlla:make:resource';
 
     /**
      * The console command description.
@@ -98,10 +98,8 @@ class ResourceMakeCommand extends GeneratorCommand
      * Replace the class name for the given stub.
      *
      * @param  string  $stub
-     * @param  string  $name
-     * @return ResourceMakeCommand
      */
-    protected function replaceModel(&$stub, $name)
+    protected function replaceModel(&$stub): self
     {
         $modelVariable = Str::plural(Str::snake($this->option('model')));
 

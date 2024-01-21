@@ -10,7 +10,7 @@ class PolicyMakeCommandTest extends TestCase
 
     public function testItCanGenerateRequestFile()
     {
-        $this->artisan('component:policy', ['name' => 'FooPolicy', '--model' => 'Foo'])
+        $this->artisan('controlla:make:policy', ['name' => 'FooPolicy', '--model' => 'Foo'])
             ->assertExitCode(0);
 
         $this->assertFileContains([
