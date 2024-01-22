@@ -63,7 +63,7 @@ class RequestMakeCommand extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        return $this->replaceNamespace($stub, $name)->replaceModel($stub, $name)->replaceType($stub)->replaceClass($stub, $name);
+        return $this->replaceNamespace($stub, $name)->replaceModel($stub)->replaceType($stub)->replaceClass($stub, $name);
     }
 
     /**

@@ -91,7 +91,7 @@ class ResourceMakeCommand extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        return $this->replaceNamespace($stub, $name)->replaceModel($stub, $name)->replaceClass($stub, $name);
+        return $this->replaceNamespace($stub, $name)->replaceModel($stub)->replaceClass($stub, $name);
     }
 
     /**
