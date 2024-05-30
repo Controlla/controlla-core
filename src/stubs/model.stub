@@ -22,6 +22,6 @@ class {{ class }} extends Model
      */
     public function getModelLabel()
     {
-        return $this->column;
+        return $this->name;
     }
 }
