@@ -2,6 +2,4 @@
 
 namespace Controlla\Core;
 
-class Core
-{
-}
+class Core {}

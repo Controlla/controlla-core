@@ -148,7 +148,7 @@ class ReplaceLinesCommand extends Command
      */
     protected function getPath($name)
     {
-        return $this->laravel['path'] . '/../' . $name;
+        return $this->laravel['path'].'/../'.$name;
     }
 
     /**
@@ -158,7 +158,7 @@ class ReplaceLinesCommand extends Command
      */
     protected function getStub(string $replaceLine)
     {
-        return $this->resolveStubPath('/../lines/' . $replaceLine . '.stub');
+        return $this->resolveStubPath('/../lines/'.$replaceLine.'.stub');
     }
 
     /**
