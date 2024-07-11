@@ -76,12 +76,12 @@ class ReplaceLinesCommand extends Command
     {
         $model = $this->getModelInput();
 
-        $this->replacesLines($model);
+        $this->replaceLinesInFiles($model);
 
         $this->info('Replaced lines successfully.');
     }
 
-    public function replacesLines($model)
+    public function replaceLinesInFiles($model)
     {
         foreach (array_values($this->replaceLines) as $key => $stub) {
             $path = $this->getPath($this->replaceFiles[$key]);
@@ -103,7 +103,7 @@ class ReplaceLinesCommand extends Command
     {
         $stub = $this->files->get($this->getStub($name));
 
-        return $this->replaceClass($stub)->replaceFile($tag, $stub, $file);
+        return $this->replaceClass($stub)->replaceTagWithStub($tag, $stub, $file);
     }
 
     /**
@@ -135,7 +135,7 @@ class ReplaceLinesCommand extends Command
      * @param  string  $file
      * @return string
      */
-    protected function replaceFile($tag, $stub, $file)
+    protected function replaceTagWithStub($tag, $stub, $file)
     {
         return str_replace($tag, $stub, $file);
     }
@@ -148,7 +148,7 @@ class ReplaceLinesCommand extends Command
      */
     protected function getPath($name)
     {
-        return $this->laravel['path'].'/../'.$name;
+        return $this->laravel['path'] . '/../' . $name;
     }
 
     /**
@@ -158,7 +158,7 @@ class ReplaceLinesCommand extends Command
      */
     protected function getStub(string $replaceLine)
     {
-        return $this->resolveStubPath('/../lines/'.$replaceLine.'.stub');
+        return $this->resolveStubPath('/../lines/' . $replaceLine . '.stub');
     }
 
     /**
