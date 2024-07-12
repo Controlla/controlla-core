@@ -35,7 +35,7 @@ class CoreServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('controlla_core')
+            ->name('controlla-core')
             ->hasConfigFile('controlla')
             ->hasMigration('create_controlla_logs_table')
             ->hasCommands([
