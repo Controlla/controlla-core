@@ -2,18 +2,23 @@
 
 namespace Controlla\Core\Tests;
 
+use Controlla\Core\Contracts\Controlla;
 use Controlla\Core\CoreServiceProvider;
-use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
 
 class TestCase extends Orchestra
 {
     use InteractsWithPublishedFiles;
 
+    /** @var  Controlla   This was added only to help IDE auto-completion */
+    protected $controlla;
+
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->controlla = $this->app->make('controlla');
         // Factory::guessFactoryNamesUsing(
         //     fn (string $modelName) => 'Controlla\\Core\\Database\\Factories\\'.class_basename($modelName).'Factory'
         // );
