@@ -92,7 +92,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return $this->laravel['path'] . '/' . str_replace('\\', '/', $name) . '.php';
+        return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
     }
 
     /**
@@ -134,6 +134,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
     {
         $path = $this->getPath('config/controlla.php');
         $file = $this->files->get($path);
-        return $this->files->put($path, str_replace('// New Module', $this->getModule() . '\n// New Module', $file));
+
+        return $this->files->put($path, str_replace('// New Module', $this->getModule().'\n// New Module', $file));
     }
 }
