@@ -7,11 +7,10 @@
  *
  * Para agregar un nuevo módulo, simplemente añade un nuevo elemento al array 'modules'
  * con el nombre del módulo y el nombre completo del Service Provider correspondiente.
- *
  */
 
 return [
-  'modules' => [
-    // New Module
-  ]
+    'modules' => [
+        // New Module
+    ],
 ];
