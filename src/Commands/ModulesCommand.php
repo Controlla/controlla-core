@@ -2,9 +2,10 @@
 
 namespace Controlla\Core\Commands;
 
-use Controlla\Core\Contracts\Controlla;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Controlla\Core\Contracts\Controlla;
+use Controlla\Core\Modules\BaseModuleServiceProvider;
 
 class ModulesCommand extends Command
 {

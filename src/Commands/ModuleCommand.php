@@ -3,7 +3,6 @@
 namespace Controlla\Core\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -41,10 +40,6 @@ class ModuleCommand extends Command implements PromptsForMissingInput
     public function __construct(Filesystem $files)
     {
         parent::__construct();
-
-        if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
-            $this->addTestOptions();
-        }
 
         $this->files = $files;
     }
@@ -97,7 +92,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
+        return $this->laravel['path'] . '/' . str_replace('\\', '/', $name) . '.php';
     }
 
     /**
@@ -107,7 +102,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
      */
     protected function getModuleInput()
     {
-        return trim($this->argument('moduele'));
+        return trim($this->argument('module'));
     }
 
     /**
@@ -133,12 +128,12 @@ class ModuleCommand extends Command implements PromptsForMissingInput
     /**
      * Register module.
      *
-     * @return string
+     * @return bool|int
      */
     protected function registerModule()
     {
         $path = $this->getPath('config/controlla.php');
         $file = $this->files->get($path);
-        $this->files->put($path, str_replace('// New Module', $this->getModule().'\n// New Module', $file));
+        return $this->files->put($path, str_replace('// New Module', $this->getModule() . '\n// New Module', $file));
     }
 }

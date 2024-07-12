@@ -41,10 +41,11 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
+
         $this->controlla = $app->make(ControllaContract::class); // retrieve the controlla singleton
         $this->basePath = $this->controlla->getBasePath();
         $this->name = Str::title("{$this->id} Module");
-        $this->namespaceRoot = "App\Modules\\".Str::title($this->id);
+        $this->namespaceRoot = "App\Modules\\" . Str::title($this->id);
     }
 
     /**
@@ -53,7 +54,7 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__."/config/{$this->id}.php" => config_path("{$this->id}.php"),
+            __DIR__ . "/config/{$this->id}.php" => config_path("{$this->id}.php"),
         ], 'config');
 
         if ($this->areMigrationsEnabled()) {
@@ -122,9 +123,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     {
         $now = Carbon::now();
         foreach ($this->migrations as $migration) {
-            $filePath = $this->getBasePath()."/database/migrations/{$this->id}/{$migration}.php";
+            $filePath = $this->getBasePath() . "/database/migrations/{$this->id}/{$migration}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -146,9 +147,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerModels()
     {
         foreach ($this->models as $key => $model) {
-            $filePath = $this->getBasePath()."/app/Models/{$this->id}/{$model}.php";
+            $filePath = $this->getBasePath() . "/app/Models/{$this->id}/{$model}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -175,7 +176,7 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
 
     public static function generateMigrationName(string $migrationFileName, Carbon $now): string
     {
-        $migrationsPath = 'migrations/'.dirname($migrationFileName).'/';
+        $migrationsPath = 'migrations/' . dirname($migrationFileName) . '/';
         $migrationFileName = basename($migrationFileName);
 
         $len = strlen($migrationFileName) + 4;
@@ -186,11 +187,11 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
         }
 
         foreach (glob(database_path("{$migrationsPath}*.php")) as $filename) {
-            if ((substr($filename, -$len) === $migrationFileName.'.php')) {
+            if ((substr($filename, -$len) === $migrationFileName . '.php')) {
                 return $filename;
             }
         }
 
-        return database_path($migrationsPath.$now->format('Y_m_d_His').'_'.Str::of($migrationFileName)->snake()->finish('.php'));
+        return database_path($migrationsPath . $now->format('Y_m_d_His') . '_' . Str::of($migrationFileName)->snake()->finish('.php'));
     }
 }

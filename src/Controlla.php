@@ -2,10 +2,11 @@
 
 namespace Controlla\Core;
 
-use Controlla\Core\Contracts\Controlla as ControllaContract;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Collection;
 use ReflectionClass;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\Foundation\Application;
+use Controlla\Core\Modules\BaseModuleServiceProvider;
+use Controlla\Core\Contracts\Controlla as ControllaContract;
 
 class Controlla implements ControllaContract
 {
@@ -36,7 +37,7 @@ class Controlla implements ControllaContract
      */
     public function registerModule($moduleClass, $config = [])
     {
-        /** @var WhatsappModuleServiceProvider */
+        /** @var BaseModuleServiceProvider */
         $module = $this->app->register($moduleClass);
 
         $this->modules->put($module->getId(), $module);
