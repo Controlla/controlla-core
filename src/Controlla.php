@@ -2,11 +2,11 @@
 
 namespace Controlla\Core;
 
-use ReflectionClass;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\Foundation\Application;
-use Controlla\Core\Modules\BaseModuleServiceProvider;
 use Controlla\Core\Contracts\Controlla as ControllaContract;
+use Controlla\Core\Modules\BaseModuleServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Collection;
+use ReflectionClass;
 
 class Controlla implements ControllaContract
 {
