@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Krnos\Fire\HasChanges;
+
+class Conversation extends Model
+{
+    use HasChanges;
+
+    protected $casts = [];
+
+    protected $appends = [];
+
+    protected $fillable = [];
+
+    /**
+     * Get the model's label in fire.
+     *
+     * @return string
+     */
+    public function getModelLabel()
+    {
+        return $this->name;
+    }
+}

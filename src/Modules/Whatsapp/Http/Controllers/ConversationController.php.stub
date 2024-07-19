@@ -1,0 +1,155 @@
+<?php
+
+namespace App\Http\Controllers\Resources;
+
+use App\Exports\ConversationExport;
+use App\Http\Controllers\Controller;
+use App\Http\Filters\QueryBuilder;
+use App\Http\Requests\Conversation\ConversationStoreRequest;
+use App\Http\Requests\Conversation\ConversationUpdateRequest;
+use App\Http\Requests\ExportRequest;
+use App\Http\Requests\ImportRequest;
+use App\Http\Resources\Conversation\ConversationResource;
+use App\Imports\ConversationImport;
+use App\Models\Conversation;
+use App\Services\Conversation\ConversationServiceInterface;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
+
+class ConversationController extends Controller
+{
+  /**
+   * @var ConversationServiceInterface
+   */
+  protected ConversationServiceInterface $service;
+
+  public function __construct(ConversationServiceInterface $service)
+  {
+    $this->service = $service;
+  }
+
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index(Request $request): JsonResponse
+  {
+    $this->authorize('index', Conversation::class);
+
+    return ConversationResource::collection($this->service->getAllPaginated($request))->response();
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \App\Http\Requests\Conversation\ConversationStoreRequest  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(ConversationStoreRequest $request): ConversationResource
+  {
+    $this->authorize('store', Conversation::class);
+    return new ConversationResource($this->service->create($request->validated()));
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Conversation $conversation
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Conversation $conversation): ConversationResource
+  {
+    $this->authorize('show', $conversation);
+    $conversation = $this->service->findOrFail($conversation->id);
+    return new ConversationResource($conversation);
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \App\Http\Requests\Conversation\ConversationUpdateRequest  $request
+   * @param  \App\Models\Conversation $conversation
+   * @return \Illuminate\Http\Response
+   */
+  public function update(ConversationUpdateRequest $request, Conversation $conversation): ConversationResource
+  {
+    $this->authorize('update', $conversation);
+    $conversation = $this->service->update($conversation->id, $request->validated());
+    return new ConversationResource($conversation);
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\Conversation  $conversation
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Conversation $conversation): JsonResponse
+  {
+    $this->authorize('destroy', $conversation);
+    $this->service->delete($conversation->id);
+    return response()->json(null, 204);
+  }
+
+  /**
+   * Remove multiple resource from storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function destroyMany(Request $request): JsonResponse
+  {
+    foreach ($request->input('ids') as $id) {
+      $conversation = Conversation::find($id);
+
+      if (!$conversation) {
+        return response()->json(['errors' => array(['code' => 404, 'message' => __('conversations.not_find')])], 404);
+      }
+      $this->authorize('delete', $conversation);
+    }
+
+    $this->service->destroy($request->input('ids'));
+
+    return response()->json(null, 204);
+  }
+
+  /**
+   * Display report from a listing of the resource.
+   *
+   * @param  App\Http\Requests\ExportRequest $request
+   * @return PDF CSV or XLS
+   */
+  public function export(ExportRequest $request, Excel $excel)
+  {
+    $this->authorize('index', Conversation::class);
+    $file = 'conversations.' . $request->input('format');
+    $queryBuilder = new QueryBuilder(new Conversation(), $request->request);
+    return $excel->download(new ConversationExport($queryBuilder->build()->get()), $file);
+  }
+
+  /**
+   * Import data from a listing of the file.
+   *
+   * @param  App\Http\Requests\ImportRequest $request
+   * @return PDF CSV or XLS
+   */
+  public function import(ImportRequest $request, Excel $excel): JsonResponse
+  {
+    $excel->import(new ConversationImport(auth()->user()), $request->file('importFile'));
+
+    return response()->json(['code' => 201, 'message' => __('strings.imported_successfully')], 201);
+  }
+
+  /**
+   * Dowload template.
+   *
+   * @return File CSV
+   */
+  public function template(Excel $excel)
+  {
+    return $excel->download(new ConversationExport(new Collection([])), 'conversations.csv');
+  }
+}

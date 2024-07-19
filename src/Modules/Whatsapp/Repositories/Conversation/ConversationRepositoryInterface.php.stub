@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Repositories\Conversation;
+
+use Controlla\Core\Repositories\BaseRepositoryInterface;
+
+interface ConversationRepositoryInterface extends BaseRepositoryInterface
+{
+    // Write something awesome
+}

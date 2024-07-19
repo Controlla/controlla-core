@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Services\Conversation;
+
+use Controlla\Core\Services\BaseServiceInterface;
+
+interface ConversationServiceInterface extends BaseServiceInterface
+{
+
+    // Write something awesome
+}

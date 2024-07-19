@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Services\Conversation;
+
+use App\Repositories\Conversation\ConversationRepositoryInterface;
+use Controlla\Core\Services\BaseService;
+
+class ConversationService extends BaseService implements ConversationServiceInterface
+{
+    /**
+     * @var ConversationRepositoryInterface
+     */
+    protected $repository;
+
+    public function __construct(ConversationRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    // Define your custom methods
+}
