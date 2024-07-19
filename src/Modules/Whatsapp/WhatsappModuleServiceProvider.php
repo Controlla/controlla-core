@@ -21,12 +21,12 @@ class WhatsappModuleServiceProvider extends BaseModuleServiceProvider
     /** @var array */
     protected $models = [
         'Conversation',
-        'Message'
+        'Message',
     ];
 
     /** @var array */
     protected $policies = [
-        'ConversationPolicy'
+        'ConversationPolicy',
     ];
 
     /** @var array */
@@ -37,24 +37,24 @@ class WhatsappModuleServiceProvider extends BaseModuleServiceProvider
     /** @var array */
     protected $requests = [
         'Conversation/ConversationStoreRequest',
-        'Conversation/ConversationUpdateRequest'
+        'Conversation/ConversationUpdateRequest',
     ];
 
     /** @var array */
     protected $resources = [
-        'Conversation/ConversationResource'
+        'Conversation/ConversationResource',
     ];
 
     /** @var array */
     protected $repositories = [
         'Conversation/ConversationRepository',
-        'Conversation/ConversationRepositoryInterface'
+        'Conversation/ConversationRepositoryInterface',
     ];
 
     /** @var array */
     protected $services = [
         'Conversation/ConversationService',
-        'Conversation/ConversationServiceInterface'
+        'Conversation/ConversationServiceInterface',
     ];
 
     /**
