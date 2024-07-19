@@ -63,9 +63,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
         parent::__construct($app);
 
         $this->controlla = $app->make(ControllaContract::class); // retrieve the controlla singleton
-        $this->basePath = dirname(dirname((new ReflectionClass(static::class))->getFileName()));
+        $this->basePath = dirname((new ReflectionClass(static::class))->getFileName());
         $this->name = Str::title("{$this->id} Module");
-        $this->namespaceRoot = "App\Modules\\".Str::title($this->id);
+        $this->namespaceRoot = static::class;
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__."/config/{$this->id}.php" => config_path("{$this->id}.php"),
+            __DIR__ . "/config/{$this->id}.php" => config_path("{$this->id}.php"),
         ], 'config');
 
         if ($this->areMigrationsEnabled()) {
@@ -157,9 +157,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     {
         $now = Carbon::now();
         foreach ($this->migrations as $migration) {
-            $filePath = $this->getBasePath()."/resources/database/migrations/{$migration}.php";
+            $filePath = $this->getBasePath() . "/resources/database/migrations/{$migration}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -181,9 +181,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerModels()
     {
         foreach ($this->models as $key => $model) {
-            $filePath = $this->getBasePath()."/Models/{$model}.php";
+            $filePath = $this->getBasePath() . "/Models/{$model}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -200,9 +200,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerPolicies()
     {
         foreach ($this->policies as $key => $policy) {
-            $filePath = $this->getBasePath()."/Policies/{$policy}.php";
+            $filePath = $this->getBasePath() . "/Policies/{$policy}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -219,9 +219,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerControllers()
     {
         foreach ($this->controllers as $key => $controller) {
-            $filePath = $this->getBasePath()."/Http/Controllers/{$controller}.php";
+            $filePath = $this->getBasePath() . "/Http/Controllers/{$controller}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -238,9 +238,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerRequests()
     {
         foreach ($this->requests as $key => $request) {
-            $filePath = $this->getBasePath()."/Http/Requests/{$request}.php";
+            $filePath = $this->getBasePath() . "/Http/Requests/{$request}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -257,9 +257,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerResources()
     {
         foreach ($this->resources as $key => $resource) {
-            $filePath = $this->getBasePath()."/Http/Resources/{$resource}.php";
+            $filePath = $this->getBasePath() . "/Http/Resources/{$resource}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -276,9 +276,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerRepositories()
     {
         foreach ($this->repositories as $key => $repository) {
-            $filePath = $this->getBasePath()."/Repositories/{$repository}.php";
+            $filePath = $this->getBasePath() . "/Repositories/{$repository}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -295,9 +295,9 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
     protected function registerServices()
     {
         foreach ($this->services as $key => $service) {
-            $filePath = $this->getBasePath()."/Services/{$service}.php";
+            $filePath = $this->getBasePath() . "/Services/{$service}.php";
 
-            if (! file_exists($filePath)) {
+            if (!file_exists($filePath)) {
                 // Support for the .stub file extension
                 $filePath .= '.stub';
             }
@@ -338,7 +338,7 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
 
     public static function generateMigrationName(string $migrationFileName, Carbon $now): string
     {
-        $migrationsPath = 'migrations/'.dirname($migrationFileName).'/';
+        $migrationsPath = 'migrations/' . dirname($migrationFileName) . '/';
         $migrationFileName = basename($migrationFileName);
 
         $len = strlen($migrationFileName) + 4;
@@ -349,11 +349,11 @@ abstract class BaseModuleServiceProvider extends ServiceProvider
         }
 
         foreach (glob(database_path("{$migrationsPath}*.php")) as $filename) {
-            if ((substr($filename, -$len) === $migrationFileName.'.php')) {
+            if ((substr($filename, -$len) === $migrationFileName . '.php')) {
                 return $filename;
             }
         }
 
-        return database_path($migrationsPath.$now->format('Y_m_d_His').'_'.Str::of($migrationFileName)->snake()->finish('.php'));
+        return database_path($migrationsPath . $now->format('Y_m_d_His') . '_' . Str::of($migrationFileName)->snake()->finish('.php'));
     }
 }
