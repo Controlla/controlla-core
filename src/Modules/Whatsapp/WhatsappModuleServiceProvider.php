@@ -3,7 +3,7 @@
 namespace Controlla\Core\Modules\Whatsapp;
 
 use Controlla\Core\Modules\BaseModuleServiceProvider;
-use Controlla\Core\Modules\Whatsapp\Services\WhatsappService;
+use Controlla\Core\Modules\Whatsapp\Services\WhatsAppService;
 
 class WhatsappModuleServiceProvider extends BaseModuleServiceProvider
 {
@@ -62,8 +62,8 @@ class WhatsappModuleServiceProvider extends BaseModuleServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(WhatsappService::class, function () {
-            return new WhatsappService();
+        $this->app->singleton(WhatsAppService::class, function () {
+            return new WhatsAppService();
         });
     }
 }
