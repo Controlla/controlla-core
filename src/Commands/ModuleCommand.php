@@ -52,7 +52,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
 
         $this->registerModule();
 
-        $this->callSilently('vendor:publish', [
+        $this->call('vendor:publish', [
             '--provider' => $this->getModule(),
         ]);
 
@@ -62,7 +62,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
             $this->call('migrate');
         }
 
-        $this->components->info(sprintf('Controlla Module [%s] created successfully.', $this->getModule()));
+        $this->components->info(sprintf('Controlla Module [%s] installed successfully.', $this->getModule()));
     }
 
     /**
@@ -89,7 +89,7 @@ class ModuleCommand extends Command implements PromptsForMissingInput
      */
     protected function getPath($name)
     {
-        return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
+        return $this->laravel['path'] . '/' . str_replace('\\', '/', $name) . '.php';
     }
 
     /**
@@ -132,6 +132,6 @@ class ModuleCommand extends Command implements PromptsForMissingInput
         $path = $this->getPath('/../config/controlla');
         $file = $this->files->get($path);
 
-        return $this->files->put($path, str_replace('// New Module', $this->getModule()."::class\r\n        // New Module", $file));
+        return $this->files->put($path, str_replace('// New Module', $this->getModule() . "::class\r\n        // New Module", $file));
     }
 }
