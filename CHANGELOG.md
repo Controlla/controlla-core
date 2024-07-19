@@ -2,6 +2,10 @@
 
 All notable changes to `core` will be documented in this file.
 
+## 1.3.2 - 2024-07-19
+
+Fixe
+
 ## 1.0.5 - 2024-01-03
 
 Add getAllPaginated function
