@@ -5,7 +5,6 @@ namespace Controlla\Core\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 
 use function Laravel\Prompts\select;
 
